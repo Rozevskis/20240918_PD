@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Song;
+use App\Models\Playlist;
 
 class SongController extends Controller
 {
@@ -48,7 +49,8 @@ class SongController extends Controller
      */
     public function show(Song $song)
     {
-       return view('song.show', ['song' => $song]);
+        $allPlaylists = Playlist::all();
+        return view('song.show', ['song' => $song, 'allPlaylists' => $allPlaylists ]);
     }
 
     /**
