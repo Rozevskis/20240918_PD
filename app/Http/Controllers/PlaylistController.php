@@ -34,6 +34,10 @@ class PlaylistController extends Controller
 
         return redirect('/playlist')->with('success', 'Playlist created successfully!');
     }
+    public function create()
+    {
+       return view('playlist.create');
+    }
 
     /**
      * Display the specified resource.
