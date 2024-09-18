@@ -36,7 +36,7 @@
 
                                     <form action="{{ route('song.removePlaylist', $song->id) }}" method="POST" class="inline-block">
                                         @csrf
-                                        <input type="hidden" name="song" value="{{ $song->id }}">
+                                        <input type="hidden" name="playlist" value="{{ $playlist->id }}">
                                         <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                                             Remove
                                         </button>
@@ -46,7 +46,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <form action="{ route('song.addPlaylist', $song->id) }" method="POST" class="inline-block">
+                <form action="{{ route('song.addPlaylist', $song->id) }}" method="POST" class="inline-block">
                     @csrf
                     <label for="playlist">Choose a Playlist:</label>
                     <select name="playlist" id="playlist">

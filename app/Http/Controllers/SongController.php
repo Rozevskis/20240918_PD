@@ -99,4 +99,25 @@ class SongController extends Controller
 
         return redirect('/song'); //--------------Šo vajadzēs samainīt!!!!!!
     }
+    public function addPlaylist(Request $request, Song $song) {
+
+        if ($song->playlists->contains($request->playlist)) {
+            return redirect()->back()->with('error', 'Song is already in the playlist.');
+        }
+
+        $song->playlists()->attach($request->playlist);
+        return redirect('/song/' . $song->id)->with('success', 'Song added successfully!');
+    }
+
+    public function removePlaylist(Request $request, Song $song) {
+        // echo $song->playlists;
+        
+        if ($song->playlists->contains($request->playlist)) {
+        $song->playlists()->detach($request->playlist);
+        }else{
+            return redirect()->back()->with('error', 'Song is not in the playlist.');
+        }
+
+        return redirect('/song/' . $song->id)->with('success', 'Song removed successfully!');
+    }
 }
