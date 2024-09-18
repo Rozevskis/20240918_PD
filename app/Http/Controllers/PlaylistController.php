@@ -103,5 +103,15 @@ class PlaylistController extends Controller
         $playlist->songs()->attach($request->song);
         return redirect('/playlist/' . $playlist->id)->with('success', 'Song added successfully!');
     }
+    public function removesong(Request $request, Playlist $playlist) {
+
+        if ($playlist->songs->contains($request->song)) {
+        $playlist->songs()->detach($request->song);
+        }else{
+            return redirect()->back()->with('error', 'Song is not in the playlist.');
+        }
+
+        return redirect('/playlist/' . $playlist->id)->with('success', 'Song removed successfully!');
+    }
 
 }
