@@ -63,7 +63,7 @@ class PlaylistController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
 {
     // Validate the request data
     $request->validate([
@@ -72,8 +72,8 @@ class PlaylistController extends Controller
     ]);
 
     // Find the playlist and update its attributes
-    $playlist = Playlist::findOrFail($id);
-    $playlist->update([
+    
+    Playlist::where('id', $id)->update([
         'name' => $request->input('name'),
         'tag' => $request->input('tag'),
     ]);
