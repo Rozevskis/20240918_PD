@@ -95,11 +95,12 @@ class PlaylistController extends Controller
     }
 
     public function addSong(Request $request, Playlist $playlist) {
-        if ($playlist->songs->contains($request['song'])) {
+
+        if ($playlist->songs->contains($request->song)) {
             return redirect()->back()->with('error', 'Song is already in the playlist.');
         }
 
-        $playlist->songs()->attach();
+        $playlist->songs()->attach($request->song);
         return redirect('/playlist/' . $playlist->id)->with('success', 'Song added successfully!');
     }
 
