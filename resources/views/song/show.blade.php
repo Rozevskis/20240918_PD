@@ -27,8 +27,26 @@
             </div>
             <div class="px-6 pt-4 pb-2">
                 <h1>Playlists</h1>
-                
-                <form action="" method="POST" class="inline-block">
+                <table class="w-full table-auto">
+                    <tbody>
+                        @foreach($song->playlists as $playlist)
+                            <tr>
+                                <td class="border px-4 py-2">
+                                {{ $playlist->name }} | {{ $playlist->tag }}
+
+                                    <form action="{{ route('song.removePlaylist', $song->id) }}" method="POST" class="inline-block">
+                                        @csrf
+                                        <input type="hidden" name="song" value="{{ $song->id }}">
+                                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                                            Remove
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <form action="{ route('song.addPlaylist', $song->id) }" method="POST" class="inline-block">
                     @csrf
                     <label for="playlist">Choose a Playlist:</label>
                     <select name="playlist" id="playlist">
